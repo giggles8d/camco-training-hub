@@ -16,6 +16,14 @@ export default function Dashboard() {
     ? user.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()
     : 'U'
 
+  // Build the program URL — append employee name for auto-login on quality portal
+  const getProgramUrl = (program) => {
+    if (program.slug === 'quality') {
+      return `${program.url}?name=${encodeURIComponent(user.name)}`
+    }
+    return program.url
+  }
+
   return (
     <div className="hub-shell">
       {/* Header */}
@@ -58,7 +66,7 @@ export default function Dashboard() {
             {programs.map(program => (
               <a
                 key={program.id}
-                href={program.url}
+                href={getProgramUrl(program)}
                 className="hub-program-card"
                 style={{ '--program-color': program.color || '#3b82f6' }}
               >
