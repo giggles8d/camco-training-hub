@@ -2,6 +2,7 @@ import { useAuth } from '../context/AuthContext'
 
 const PROGRAM_ICONS = {
   quality: '🔧',
+  sixsigma: '📊',
   safety: '🦺',
   operations: '⚙️',
   hr: '👥',
@@ -16,10 +17,10 @@ export default function Dashboard() {
     ? user.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()
     : 'U'
 
-  // Build the program URL — append employee name for auto-login on quality portal
+  // Append employee name to portal URLs for auto-login
   const getProgramUrl = (program) => {
-    if (program.slug === 'quality') {
-     return `${program.url}/?name=${encodeURIComponent(user.name)}`
+    if (program.url) {
+      return `${program.url}/?name=${encodeURIComponent(user.name)}`
     }
     return program.url
   }
@@ -64,7 +65,7 @@ export default function Dashboard() {
         ) : (
           <div className="hub-programs">
             {programs.map(program => (
-              <a
+              
                 key={program.id}
                 href={getProgramUrl(program)}
                 className="hub-program-card"
