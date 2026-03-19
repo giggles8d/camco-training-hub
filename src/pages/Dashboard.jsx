@@ -19,7 +19,7 @@ export default function Dashboard() {
   // Build the program URL — append employee name for auto-login on quality portal
   const getProgramUrl = (program) => {
     if (program.slug === 'quality') {
-      return `${program.url}?name=${encodeURIComponent(user.name)}`
+     return `${program.url}/?name=${encodeURIComponent(user.name)}`
     }
     return program.url
   }
