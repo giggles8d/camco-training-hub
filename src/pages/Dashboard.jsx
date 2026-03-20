@@ -63,8 +63,7 @@ export default function Dashboard() {
         ) : (
           <div className="hub-programs">
             {programs.map(program => (
-              
-                key={program.id}
+              key={program.id}
                 href={getProgramUrl(program)}
                 className="hub-program-card"
                 style={{ '--program-color': program.color || '#3b82f6' }}
