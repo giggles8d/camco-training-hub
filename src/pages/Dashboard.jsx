@@ -17,7 +17,6 @@ export default function Dashboard() {
     ? user.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()
     : 'U'
 
-  // Append employee name to all portal URLs for auto-login
   const getProgramUrl = (program) => {
     if (program.url) {
       return `${program.url}/?name=${encodeURIComponent(user.name)}`
@@ -62,22 +61,26 @@ export default function Dashboard() {
           </div>
         ) : (
           <div className="hub-programs">
-            {programs.map(program => (
-              key={program.id}
-                href={getProgramUrl(program)}
-                className="hub-program-card"
-                style={{ '--program-color': program.color || '#3b82f6' }}
-              >
-                <div className="hub-program-icon">
-                  {PROGRAM_ICONS[program.slug] || PROGRAM_ICONS.default}
+            {programs.map(program => {
+              const url = getProgramUrl(program)
+              return (
+                <div
+                  key={program.id}
+                  onClick={() => { window.location.href = url }}
+                  className="hub-program-card"
+                  style={{ '--program-color': program.color || '#3b82f6', cursor: 'pointer' }}
+                >
+                  <div className="hub-program-icon">
+                    {PROGRAM_ICONS[program.slug] || PROGRAM_ICONS.default}
+                  </div>
+                  <div className="hub-program-body">
+                    <div className="hub-program-name">{program.name}</div>
+                    <div className="hub-program-desc">{program.description}</div>
+                  </div>
+                  <div className="hub-program-arrow">→</div>
                 </div>
-                <div className="hub-program-body">
-                  <div className="hub-program-name">{program.name}</div>
-                  <div className="hub-program-desc">{program.description}</div>
-                </div>
-                <div className="hub-program-arrow">→</div>
-              </a>
-            ))}
+              )
+            })}
           </div>
         )}
       </main>
