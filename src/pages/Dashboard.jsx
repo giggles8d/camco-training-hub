@@ -17,17 +17,16 @@ export default function Dashboard() {
     ? user.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()
     : 'U'
 
-  // Append employee name to portal URLs for auto-login
+  // Append employee name to all portal URLs for auto-login
   const getProgramUrl = (program) => {
     if (program.url) {
       return `${program.url}/?name=${encodeURIComponent(user.name)}`
     }
-    return program.url
+    return '#'
   }
 
   return (
     <div className="hub-shell">
-      {/* Header */}
       <header className="hub-header">
         <div className="hub-header-left">
           <img src="/camco-logo.webp" alt="CAMCO" className="hub-header-logo" />
@@ -43,7 +42,6 @@ export default function Dashboard() {
 
       <div className="hub-accent-rule" />
 
-      {/* Main */}
       <main className="hub-main">
         <div className="hub-welcome">
           <div className="hub-welcome-text">
